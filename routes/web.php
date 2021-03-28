@@ -15,4 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/concerts', 'ConcertController@index');
+/*Routes pour les concerts*/
+Route::get('/concerts', 'ConcertController@index')->name('concerts.index');
+Route::get('/concerts/{slug}', 'ConcertController@show')->name('concerts.show');
