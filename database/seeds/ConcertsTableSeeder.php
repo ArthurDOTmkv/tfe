@@ -1,5 +1,7 @@
 <?php
 
+use App\Concert;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
 
 class ConcertsTableSeeder extends Seeder
@@ -11,6 +13,18 @@ class ConcertsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $faker = Factory::create();
+        
+        for($i=0; $i<20; $i++)
+        {
+            Concert::create([
+               'titre' => $faker->sentence,
+               'slug' => $faker->slug,
+               'sous-titre' => $faker->sentence(20),
+               'description' => $faker->text,
+               'prix' => $faker->numberBetween(30, 120) * 100,          //Il est de bonne pratique de stocker le prix en centimes dans la DB
+               'image' => 'https://via.placeholder.com/200x250'
+            ]);
+        }
     }
 }
