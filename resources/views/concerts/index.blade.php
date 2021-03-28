@@ -103,12 +103,12 @@
               <strong class="d-inline-block mb-2 text-primary">World</strong>
               <h3 class="mb-0">{{$concert->titre}}</h3>
               <div class="mb-1 text-muted">{{$concert->created_at->format('d/m/Y')}}</div>
-              <div class="mb-1 text-muted"><b>Prix</b> : {{$concert->prix}}</div>
-              <p class="card-text mb-auto">{{$concert->soustitre}}</p>
+              <div class="mb-1 text-muted"><b>Prix</b> : {{$concert->getPrix()}}</div>
+              <p class="mb-auto">{{$concert->soustitre}}</p>
               <a href="#" class="stretched-link btn btn-light">Continuer vers le concert</a>
             </div>
             <div class="col-auto d-none d-lg-block">
-                <img src="{{$concert->image}}" alt="">
+                <img src="{{$concert->image}}" alt="" />
             </div>
           </div>
         </div>
