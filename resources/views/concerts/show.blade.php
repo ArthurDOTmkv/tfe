@@ -9,7 +9,11 @@
         <div class="mb-1 text-muted">{{$concert->created_at->format('d/m/Y')}}</div>
         <div class="mb-1 text-muted"><b>Prix</b> : {{$concert->getPrix()}}</div>
         <p class="mb-auto">{{$concert->description}}</p>
-        <form action='#' method='POST'>
+        <form action='{{route('cart.store')}}' method='POST'>
+            @csrf
+            <input type='hidden' name='id' value='{{$concert->id}}'>
+            <input type='hidden' name='titre' value='{{$concert->titre}}'>
+            <input type='hidden' name='prix' value='{{$concert->prix}}'>
             <button class='btn btn-light'>Ajouter au panier</button>
         </form>
       </div>

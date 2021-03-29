@@ -15,6 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/*
+    @name : nécessaire pour passer la route en paramètres (form)
+*/
 /*Routes pour les concerts*/
 Route::get('/concerts', 'ConcertController@index')->name('concerts.index');
 Route::get('/concerts/{slug}', 'ConcertController@show')->name('concerts.show');
+
+/*Routes pour le panier*/
+Route::post('/panier/ajouter', 'CartController@store')->name('cart.store');
