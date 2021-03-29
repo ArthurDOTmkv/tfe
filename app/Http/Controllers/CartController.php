@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Concert;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
@@ -34,10 +35,10 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        
+    {
         Cart::add($request->id, $request->titre, 1, $request->prix)->associate('App\Concert');
         
-        return redirect()->route('concerts.index')->with('succes', 'Les places ont été ajoutées au panier');
+        return redirect()->route('concerts.index')->with('success', 'Les places ont été ajoutées au panier');
     }
 
     /**
