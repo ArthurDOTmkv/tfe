@@ -15,7 +15,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        return view('cart.index');
     }
 
     /**
@@ -35,8 +35,22 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        Cart::add($request->id, $request->titre, 1, $request->prix)->associate('App\Concert');
+    {      
+        //Eviter les doublons
+        $doublon = Cart::search(function($cartItem, $rowId) use ($request)
+        {
+            return $cartItem->id == $request->concert_id;
+        });
+        
+        if($doublon->isNotEmpty())
+        {
+            return redirect()->route('concerts.index')->with('success', 'Les places ont déjà été ajoutées au panier');
+        }
+        
+        //Ne passer que l'id en paramètre pour éviter de modifier les données à travers le front (prix, quantité, etc)
+        $concert = Concert::find($request->concert_id);
+        
+        Cart::add($concert->id, $concert->titre, 1, $concert->prix)->associate('App\Concert');
         
         return redirect()->route('concerts.index')->with('success', 'Les places ont été ajoutées au panier');
     }

@@ -11,9 +11,7 @@
         <p class="mb-auto">{{$concert->description}}</p>
         <form action='{{route('cart.store')}}' method='POST'>
             @csrf
-            <input type='hidden' name='id' value='{{$concert->id}}'>
-            <input type='hidden' name='titre' value='{{$concert->titre}}'>
-            <input type='hidden' name='prix' value='{{$concert->prix}}'>
+            <input type='hidden' name='concert_id' value='{{$concert->id}}'>
             <button class='btn btn-light'>Ajouter au panier</button>
         </form>
       </div>

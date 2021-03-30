@@ -23,4 +23,5 @@ Route::get('/concerts', 'ConcertController@index')->name('concerts.index');
 Route::get('/concerts/{slug}', 'ConcertController@show')->name('concerts.show');
 
 /*Routes pour le panier*/
+Route::get('/panier', 'CartController@index')->name('cart.index');
 Route::post('/panier/ajouter', 'CartController@store')->name('cart.store');
