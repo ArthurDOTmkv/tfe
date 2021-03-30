@@ -40,7 +40,13 @@
                           </th>
                           <td class="border-0 align-middle"><strong>{{$concert->model->getPrix()}}</strong></td>
                           <td class="border-0 align-middle"><strong>3</strong></td>
-                          <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                          <td class="border-0 align-middle">
+                            <form action="{{route('cart.destroy', $concert->rowId)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type='submit' class='text-dark'><i class='fa fa-trash'></i></button>
+                            </form>
+                          </td>
                         </tr>
                         @endforeach
                       </tbody>
