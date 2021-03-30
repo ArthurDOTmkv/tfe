@@ -21,6 +21,7 @@ Route::get('/', function () {
 /*Routes pour les concerts*/
 Route::get('/concerts', 'ConcertController@index')->name('concerts.index');
 Route::get('/concerts/{slug}', 'ConcertController@show')->name('concerts.show');
+Route::delete('/panier/{rowId}', 'CartController@destroy')->name('cart.destroy');
 
 /*Routes pour le panier*/
 Route::get('/panier', 'CartController@index')->name('cart.index');
