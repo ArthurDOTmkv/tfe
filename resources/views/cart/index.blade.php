@@ -87,5 +87,9 @@
             </div>
           </div>
         </div>
+    @else
+    <div class="col-md-12">
+        <p>Le panier est vide</p>        
+    </div>
     @endif
 @endsection
