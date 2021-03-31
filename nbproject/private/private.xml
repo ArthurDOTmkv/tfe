@@ -5,9 +5,9 @@
         <group>
             <file>file:/C:/Users/Yama/tfe/routes/web.php</file>
             <file>file:/C:/Users/Yama/tfe/app/Http/Controllers/CartController.php</file>
-            <file>file:/C:/Users/Yama/tfe/resources/views/concerts/show.blade.php</file>
             <file>file:/C:/Users/Yama/tfe/resources/views/layouts/main.blade.php</file>
-            <file>file:/C:/Users/Yama/tfe/resources/views/concerts/index.blade.php</file>
+            <file>file:/C:/Users/Yama/tfe/resources/views/concerts/show.blade.php</file>
+            <file>file:/C:/Users/Yama/tfe/resources/views/cart/index.blade.php</file>
         </group>
     </open-files>
 </project-private>
