@@ -1,6 +1,11 @@
 <?php
 
-function getPrix($prix)
+function getPrix($prixCentimes)
 {
-    dd($prix);
+    $prix = floatval($prixCentimes) / 100;
+    
+    /*
+    * Prix - Décimales - Séparateur - Espace entre les milliers
+    */
+    return number_format($prix, 2, ',', ' ') . " €";
 }

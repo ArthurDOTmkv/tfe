@@ -10,6 +10,9 @@ class Concert extends Model
     {
         $prix = $this->prix / 100;
         
+        /*
+         * Prix - Décimales - Séparateur - Espace entre les milliers
+         */
         return number_format($prix, 2, ',', ' ') . " €";
     }
 }

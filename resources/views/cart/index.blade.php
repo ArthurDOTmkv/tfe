@@ -79,7 +79,7 @@
                   <div class="p-4">
                     <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
                     <ul class="list-unstyled mb-4">
-                      <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Sous-total de la commande </strong><strong>{{Cart::subtotal()}}</strong></li>
+                      <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Sous-total de la commande </strong><strong>{{getPrix(Cart::subtotal())}}</strong></li>
                   <!--<li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping and handling</strong><strong>$10.00</strong></li>-->
                       <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>$0.00</strong></li>
                       <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
