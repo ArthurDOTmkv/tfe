@@ -26,3 +26,6 @@ Route::delete('/panier/{rowId}', 'CartController@destroy')->name('cart.destroy')
 /*Routes pour le panier*/
 Route::get('/panier', 'CartController@index')->name('cart.index');
 Route::post('/panier/ajouter', 'CartController@store')->name('cart.store');
+
+/*Routes pour paiement*/
+Route::get('/paiement', 'PaiementController@index')->name('paiement.index');
