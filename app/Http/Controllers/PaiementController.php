@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Stripe\Stripe;
 use Illuminate\Http\Request;
 
 class PaiementController extends Controller
