@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Stripe\Stripe;
+use \Stripe\PaymentIntent;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class PaiementController extends Controller
@@ -14,6 +16,15 @@ class PaiementController extends Controller
      */
     public function index()
     {
+        Stripe::setApiKey('sk_test_51IbU2DFyQMpZqbpyg7owK5RggOzsKuLK4ixxyD1pz1BpajU26hz5PQtbN5oiUKjiuPVmipDDcxh0X38AdyJOf7tz000JxPbITq');
+        
+        $intent = PaymentIntent::create([
+            'amount' => round(Cart::total()),
+            'currency' => 'eur',
+            //'payment_method_types' => ['card'],
+          ]);
+        dd($intent);
+        
         return view('payment.index');
     }
 
