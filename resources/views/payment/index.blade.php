@@ -5,6 +5,11 @@
     <script src="https://js.stripe.com/v3/"></script>
 @endsection
 
+@section('meta')
+    <!-- En plus du token CSRF -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
+
 @section('content')
     <div class="col-md-12">
         <h1>Page de paiement</h1>
@@ -83,9 +88,12 @@
                 } else {
                     // The payment has been processed!
                     if (result.paymentIntent.status === 'succeeded') {
-                       
+                        var form = document.getElementById('paiement-form');
+                        var url = form.action;
+                        var paymentIntent = result.paymentIntent;
+                        var redirect = '/paiementreussi';
 
-                    console.log(result.paymentIntent);
+                    //console.log(result.paymentIntent);
                     }
                 }
             });

@@ -7,7 +7,8 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.82.0">
-    <title>Blog Template · Bootstrap v5.0</title>
+    @yield('meta')
+    <title>ConcertX</title>
 
     @yield('script')
 
