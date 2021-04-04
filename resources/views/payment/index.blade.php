@@ -48,5 +48,46 @@
     
         var card = elements.create("card", { style: style });
         card.mount("#card-element");
+        
+        //Messages en cas de succes/erreur du n° de la carte
+        card.on('change', ({error}) => {
+        const displayError = document.getElementById('card-errors');
+            if (error) {
+              displayError.textContent = error.message;
+            } else {
+              displayError.textContent = '';
+            }
+        });
+        // Soumission du formulaire
+        var form = document.getElementById('payment-form');
+
+        form.addEventListener('submit', function(ev) {
+            //Empêche la soumission du formulaire (rechargement de la page)
+            ev.preventDefault();    
+            // submitButton.disabled = true;
+            stripe.confirmCardPayment("{{ $clientSecret }}", {
+            payment_method: {
+                card: card,
+                /*
+                billing_details: {
+                name: 'Jenny Rosen'
+                } 
+                */
+            }
+            }).then(function(result) {
+                if (result.error) {
+                    // Show error to your customer (e.g., insufficient funds)
+                    // submitButton.disabled() = false;
+                    console.log(result.error.message);
+                } else {
+                    // The payment has been processed!
+                    if (result.paymentIntent.status === 'succeeded') {
+                       
+
+                    console.log(result.paymentIntent);
+                    }
+                }
+            });
+        });
     </script>
 @endsection
