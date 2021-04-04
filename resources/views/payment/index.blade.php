@@ -91,7 +91,28 @@
                         var form = document.getElementById('paiement-form');
                         var url = form.action;
                         var paymentIntent = result.paymentIntent;
+                        var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
                         var redirect = '/paiementreussi';
+                        
+                        fetch(
+                            url, 
+                            {
+                            headers : {
+                                "Content-Type": "application/json",
+                                "Accept": "application/json, text-plain; */*",
+                                "X-Requested-with": "XMLHttpRequest",
+                                "X-CSRF-TOKEN": token
+                            },
+                            method: 'post',
+                            body: JSON.stringify({
+                                paymentIntent: paymentIntent
+                            })
+                        }).then((data) => {
+                        console.log(data)
+                        window.location.href = redirect;
+                        }).catch((error) => {
+                            console.log(error)
+                        })
 
                     //console.log(result.paymentIntent);
                     }
