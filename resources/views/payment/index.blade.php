@@ -10,7 +10,8 @@
         <h1>Page de paiement</h1>
         <div class="row">
             <div class="col-md-6">
-                <form class="my-2" action="#">
+                <form id="paiement-form" class="my-2" action="{{route('paiement.store')}}" methode="POST">
+                    @csrf
                     <div id="card-element">
                         <!-- Elements will create Input elements here-->
                     </div>
