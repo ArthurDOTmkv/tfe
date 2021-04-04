@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Stripe\Stripe;
-use \Stripe\PaymentIntent;
+use Stripe\PaymentIntent;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
@@ -17,6 +17,11 @@ class PaiementController extends Controller
      */
     public function index()
     {
+        //Redirection vers la page de concerts si tentative d'accéder à /paiement alors que le panier est vide
+        if(Cart::count() <= 0)
+        {
+            return redirect()->route('concerts.index');
+        }
         Stripe::setApiKey('sk_test_51IbU2DFyQMpZqbpyg7owK5RggOzsKuLK4ixxyD1pz1BpajU26hz5PQtbN5oiUKjiuPVmipDDcxh0X38AdyJOf7tz000JxPbITq');
         
         $intent = PaymentIntent::create([
