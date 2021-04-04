@@ -9,10 +9,7 @@
     <meta name="generator" content="Hugo 0.82.0">
     <title>Blog Template · Bootstrap v5.0</title>
 
-    <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/blog/"> -->
-    
-    <!-- Inclus la détection de fraude -->
-    <script src="https://js.stripe.com/v3/"></script>
+    @yield('script')
 
     <!-- Bootstrap core CSS -->
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
@@ -347,11 +344,12 @@ h1, h2, h3, h4, h5, h6 {
 
 </main><!-- /.container -->
 
+@yield('js')
 <footer class="blog-footer">
   <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
   <p>
     <a href="#">Back to top</a>
   </p>
 </footer>
-  </body>
+</body>
 </html>

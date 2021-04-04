@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Stripe\Stripe;
 use \Stripe\PaymentIntent;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 
 class PaiementController extends Controller
@@ -23,9 +24,13 @@ class PaiementController extends Controller
             'currency' => 'eur',
             //'payment_method_types' => ['card'],
           ]);
-        dd($intent);
         
-        return view('payment.index');
+        //Faire passer la clé secrète à une variable pour pouvoir l'utiliser dans le front
+        $clientSecret = Arr::get($intent, "client_secret");
+        
+        return view('payment.index', [
+            "clientSecret" => $clientSecret
+        ]);
     }
 
     /**
