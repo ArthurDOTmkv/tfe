@@ -23,7 +23,7 @@
                     <div id="card-errors" role="alert">
                         <!-- We'll put the error messages in this element-->
                     </div>
-                    <button id='submit' class="btn btn-secondary mt-6 mt-4">Payer</button>
+                    <button id='submit' class="btn btn-secondary mt-6 mt-4">Payer {{getPrix(Cart::total())}}</button>
                 </form>
             </div>
         </div>
@@ -65,7 +65,7 @@
             }
         });
         // Soumission du formulaire
-        var form = document.getElementById('payment-form');
+        var form = document.getElementById('paiement-form');
 
         form.addEventListener('submit', function(ev) {
             //Empêche la soumission du formulaire (rechargement de la page)

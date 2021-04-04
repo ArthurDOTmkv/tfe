@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Concert;
 use Stripe\Stripe;
 use Stripe\PaymentIntent;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -56,7 +57,10 @@ class PaiementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Cart::destroy();
+        $data = $request->json()->all();
+        
+        return $data['paymentIntent'];
     }
 
     /**
