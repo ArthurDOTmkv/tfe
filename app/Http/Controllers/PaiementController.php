@@ -34,7 +34,7 @@ class PaiementController extends Controller
         //Faire passer la clé secrète à une variable pour pouvoir l'utiliser dans le front
         $clientSecret = Arr::get($intent, "client_secret");
         
-        return view('payment.index', [
+        return view('paiement.index', [
             "clientSecret" => $clientSecret
         ]);
     }
