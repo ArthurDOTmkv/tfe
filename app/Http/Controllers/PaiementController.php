@@ -76,6 +76,11 @@ class PaiementController extends Controller
             $concerts['concert_' . $i][] = $concert->qty;
             $i++;
         }
+        
+        $commande->concerts = serialize($concerts);
+        $commande->user_id = 1;
+        
+        $commande->save();
         Cart::destroy();
         //return $data['paymentIntent'];
     }
