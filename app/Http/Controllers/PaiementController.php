@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Concert;
+use App\Commande;
 use Stripe\Stripe;
 use Stripe\PaymentIntent;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -57,10 +58,26 @@ class PaiementController extends Controller
      */
     public function store(Request $request)
     {
-        Cart::destroy();
+        //Récupération de l'objet de paiement dans la variable $data
         $data = $request->json()->all();
         
-        return $data['paymentIntent'];
+        //Stocker les données de paymentIntent dans le champ paymentIntentId de la Commande
+        $commande = new Commande();
+        $commande->paymentIntentId = $data['paymentIntent']['id'];
+        $commande->montant = $data['paymentIntent']['amount'];
+        $commande->paymentCreatedAt = (new DateTime())->setTimestamp($data['paymentIntent']['created'])->format('d-m-Y H:i');
+        
+        $concerts = [];
+        $i = 0;
+        foreach(Cart::content() as $concert)
+        {
+            $concerts['concert_' . $i][] = $concert->model->titre;
+            $concerts['concert_' . $i][] = $concert->model->prix;
+            $concerts['concert_' . $i][] = $concert->qty;
+            $i++;
+        }
+        Cart::destroy();
+        //return $data['paymentIntent'];
     }
 
     /**

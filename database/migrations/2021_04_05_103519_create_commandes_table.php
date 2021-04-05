@@ -17,7 +17,7 @@ class CreateCommandesTable extends Migration
             $table->bigIncrements('id');
             $table->string('paymentIntentId')->unique();
             $table->integer('montant');
-            $table->dateTime('created_at');
+            $table->dateTime('paymentCreatedAt');
             $table->text('concerts');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
