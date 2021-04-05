@@ -15,6 +15,11 @@ class CreateCommandesTable extends Migration
     {
         Schema::create('commandes', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('paymentIntentId')->unique();
+            $table->integer('montant');
+            $table->dateTime('created_at');
+            $table->text('concerts');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

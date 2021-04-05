@@ -36,4 +36,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    public function commandes()
+    {
+        //Un utilisateur a plusieurs commandes
+        return $this->hasMany('App\Commande');
+    }
 }
