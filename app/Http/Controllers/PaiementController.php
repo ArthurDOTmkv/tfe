@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Concert;
+use DateTime;
 use App\Commande;
 use Illuminate\Support\Facades\Session;
 use Stripe\Stripe;
@@ -61,13 +61,11 @@ class PaiementController extends Controller
     {
         //Récupération de l'objet de paiement dans la variable $data
         $data = $request->json()->all();
-        
         //Stocker les données de paymentIntent dans le champ paymentIntentId de la Commande
         $commande = new Commande();
         $commande->paymentIntentId = $data['paymentIntent']['id'];
         $commande->montant = $data['paymentIntent']['amount'];
-        $commande->paymentCreatedAt = (new DateTime())->setTimestamp($data['paymentIntent']['created'])->format('d-m-Y H:i');
-        
+        $commande->paymentCreatedAt = (new DateTime())->setTimestamp($data['paymentIntent']['created'])->format('Y-m-d H:i:s');
         $concerts = [];
         $i = 0;
         foreach(Cart::content() as $concert)
@@ -76,23 +74,21 @@ class PaiementController extends Controller
             $concerts['concert_' . $i][] = $concert->model->prix;
             $concerts['concert_' . $i][] = $concert->qty;
             $i++;
+            
         }
-        
         $commande->concerts = serialize($concerts);
         $commande->user_id = 1;
-        
         $commande->save();
-        
-        if($data['paymentIntent']['status'] === 'success')
+        if($data['paymentIntent']['status'] === 'succeeded')
         {
             Cart::destroy();
-            Sessio::flash('success', 'Commande validé avec succès');
+            Session::flash('success', 'Commande validée avec succès');
             return response()->json(['success' => 'Enregistrement validé']);
         }
         else
         {
-            return response()->json(['failed' => 'Enregistrement échoué']);
-        }
+            return response()->json(['error' => 'Enregistrement échoué']);
+        }    
     }
 
     /**
@@ -108,7 +104,7 @@ class PaiementController extends Controller
 
     public function paiementreussi()
     {
-        return Session::has('succes') ? view('paiement.paiementreussi') : redirect()->route('concerts.index');
+        return Session::has('success') ? view('paiement.paiementreussi') : redirect()->route('concerts.index');
     }
     /**
      * Show the form for editing the specified resource.
