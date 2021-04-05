@@ -29,7 +29,5 @@ Route::post('/panier/ajouter', 'CartController@store')->name('cart.store');
 
 /*Routes pour paiement*/
 Route::get('/paiement', 'PaiementController@index')->name('paiement.index');
-Route::get('/paiementreussi', function(){
-    return view('paiement.paiementreussi');
-});
+Route::get('/paiementreussi', 'PaiementController@paiementreussi')->name('paiement.paiementreussi');
 Route::post('/paiement', 'PaiementController@store')->name('paiement.store');

@@ -106,6 +106,10 @@ class PaiementController extends Controller
         //
     }
 
+    public function paiementreussi()
+    {
+        return Session::has('succes') ? view('paiement.paiementreussi') : redirect()->route('concerts.index');
+    }
     /**
      * Show the form for editing the specified resource.
      *
