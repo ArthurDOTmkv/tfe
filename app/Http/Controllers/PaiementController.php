@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Concert;
 use App\Commande;
+use Illuminate\Support\Facades\Session;
 use Stripe\Stripe;
 use Stripe\PaymentIntent;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -81,8 +82,17 @@ class PaiementController extends Controller
         $commande->user_id = 1;
         
         $commande->save();
-        Cart::destroy();
-        //return $data['paymentIntent'];
+        
+        if($data['paymentIntent']['status'] === 'success')
+        {
+            Cart::destroy();
+            Sessio::flash('success', 'Commande validé avec succès');
+            return response()->json(['success' => 'Enregistrement validé']);
+        }
+        else
+        {
+            return response()->json(['failed' => 'Enregistrement échoué']);
+        }
     }
 
     /**
