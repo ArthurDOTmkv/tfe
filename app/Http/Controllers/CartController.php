@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Concert;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -84,9 +85,15 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $rowId)
     {
-        //
+        $data = $request->json()->all();
+        
+        Cart::update($rowId, $data['quantite']);
+        
+        Session::flash('success', 'Le nombre de tickets est passé à ' . $data['quantite']);
+        
+        return response()->json(['success' => 'La quantité a été mise à jour']);
     }
 
     /**
