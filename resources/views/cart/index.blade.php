@@ -1,5 +1,10 @@
 @extends('layouts.main')
 
+@section('meta')
+    <!-- En plus du token CSRF -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
+
 @section('content')
 @if(Cart::count() > 0)
     <div class="px-4 px-lg-0">
@@ -110,7 +115,29 @@
 <script>
     var qty = document.querySelectorAll('#quantite');
     Array.from(qty).forEach((element)=>{
-        
+        element.addEventListener('change', function(){
+            var rowId = this.getAttribute('data-id');
+            var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            fetch(
+                `/panier/${rowId}`,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json, text-plain; */*",
+                        "X-Requested-with": "XMLHttpRequest",
+                        "X-CSRF-TOKEN": token
+                    },
+                    method: 'patch',
+                    body: JSON.stringify({
+                        quantite: this.value
+                    })
+                }    
+            ).then((data) => {
+                console.log(data);
+            }).catch((error) => {
+                console.log(error);
+            })
+        });
     });
     
 </script>
