@@ -17,13 +17,13 @@
                             <div class="p-2 px-3 text-uppercase">Product</div>
                           </th>
                           <th scope="col" class="border-0 bg-light">
-                            <div class="py-2 text-uppercase">Price</div>
+                            <div class="py-2 text-uppercase">Prix</div>
                           </th>
                           <th scope="col" class="border-0 bg-light">
-                            <div class="py-2 text-uppercase">Quantity</div>
+                            <div class="py-2 text-uppercase">Quantité</div>
                           </th>
                           <th scope="col" class="border-0 bg-light">
-                            <div class="py-2 text-uppercase">Remove</div>
+                            <div class="py-2 text-uppercase">Supprimer</div>
                           </th>
                         </tr>
                       </thead>
@@ -39,7 +39,13 @@
                             </div>
                           </th>
                           <td class="border-0 align-middle"><strong>{{$concert->model->getPrix()}}</strong></td>
-                          <td class="border-0 align-middle"><strong>3</strong></td>
+                          <td class="border-0 align-middle">
+                              <select class="custom-select" name="quantite" id="quantite">
+                                    @for($i = 1; $i <= 10; $i++)
+                                        <option value="{{$i}}">{{$i}}</option>
+                                    @endfor
+                              </select>
+                          </td>
                           <td class="border-0 align-middle">
                             <form action="{{route('cart.destroy', $concert->rowId)}}" method="POST">
                                 @csrf
