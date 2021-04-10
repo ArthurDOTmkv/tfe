@@ -6,6 +6,7 @@ use App\Concert;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
@@ -89,9 +90,19 @@ class CartController extends Controller
     {
         $data = $request->json()->all();
         
-        Cart::update($rowId, $data['quantite']);
+        $validator = Validator::make($request->all(), [
+            'qty' => 'required|numeric|between:1,10'
+        ]);
+        if($validator->fails())
+        {
+            Session::flash('danger', 'ERROR');
         
-        Session::flash('success', 'Le nombre de tickets est passé à ' . $data['quantite']);
+            return response()->json(['error' => 'ERROR']);
+        }
+        
+        Cart::update($rowId, $data['qty']);
+        
+        Session::flash('success', 'Le nombre de tickets est passé à ' . $data['qty']);
         
         return response()->json(['success' => 'La quantité a été mise à jour']);
     }

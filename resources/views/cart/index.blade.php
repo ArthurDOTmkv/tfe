@@ -43,11 +43,11 @@
                           </div>
                         </div>
                       </th>
-                      <td class="border-0 align-middle"><strong>{{$concert->model->getPrix()}}</strong></td>
+                      <td class="border-0 align-middle"><strong>{{getPrix($concert->subtotal())}}</strong></td>
                       <td class="border-0 align-middle">
-                          <select class="custom-select" name="quantite" id="quantite" data-id="{{$concert->rowId}}">
+                          <select class="custom-select" name="qty" id="qty" data-id="{{$concert->rowId}}">
                                 @for($i = 1; $i <= 10; $i++)
-                                    <option value="{{$i}}">{{$i}}</option>
+                                <option value="{{$i}}">{{$i}}</option>
                                 @endfor
                           </select>
                       </td>
@@ -113,8 +113,8 @@
 
 @section('js')
 <script>
-    var qty = document.querySelectorAll('#quantite');
-    Array.from(qty).forEach((element)=>{
+    var options = document.querySelectorAll('#quantite');
+    Array.from(options).forEach((element)=>{
         element.addEventListener('change', function(){
             var rowId = this.getAttribute('data-id');
             var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -127,9 +127,13 @@
                         "X-Requested-with": "XMLHttpRequest",
                         "X-CSRF-TOKEN": token
                     },
-                    method: 'patch',
+                    /*
+                     * Le nom des méthodes EN MAJUSCULES car les valeurs 
+                     * des attributs sont key sensitives sinon erreur "Failed to fetch
+                     */
+                    method: 'PATCH',
                     body: JSON.stringify({
-                        quantite: this.value
+                        qty: this.value
                     })
                 }    
             ).then((data) => {

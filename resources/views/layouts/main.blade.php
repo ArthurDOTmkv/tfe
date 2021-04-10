@@ -224,6 +224,12 @@ h1, h2, h3, h4, h5, h6 {
         {{session('success')}}
     </div>
 @endif
+
+@if(session('danger'))
+    <div class='alert alert-danger'>
+        {{session('danger')}}
+    </div>
+@endif
   <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
     <div class="col-md-6 px-0">
       <h1 class="display-4 fst-italic">Title of a longer featured blog post</h1>
