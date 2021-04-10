@@ -40,7 +40,7 @@
                           </th>
                           <td class="border-0 align-middle"><strong>{{$concert->model->getPrix()}}</strong></td>
                           <td class="border-0 align-middle">
-                              <select class="custom-select" name="quantite" id="quantite">
+                              <select class="custom-select" name="quantite" id="quantite" data-id="{{$concert->rowId}}">
                                     @for($i = 1; $i <= 10; $i++)
                                         <option value="{{$i}}">{{$i}}</option>
                                     @endfor

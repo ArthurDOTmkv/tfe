@@ -21,11 +21,15 @@ Route::get('/', function () {
 /*Routes pour les concerts*/
 Route::get('/concerts', 'ConcertController@index')->name('concerts.index');
 Route::get('/concerts/{slug}', 'ConcertController@show')->name('concerts.show');
-Route::delete('/panier/{rowId}', 'CartController@destroy')->name('cart.destroy');
 
-/*Routes pour le panier*/
+/*  
+ * Routes pour le panier
+ * rowId est l'id dans le panier propre à la librairie LaravelShoppingCart, pas l'ID de la DB
+ */
 Route::get('/panier', 'CartController@index')->name('cart.index');
 Route::post('/panier/ajouter', 'CartController@store')->name('cart.store');
+Route::patch('/panier/{rowId}', 'CartController@update')->name('cart.update');
+Route::delete('/panier/{rowId}', 'CartController@destroy')->name('cart.destroy');
 
 /*Routes pour paiement*/
 Route::get('/paiement', 'PaiementController@index')->name('paiement.index');
