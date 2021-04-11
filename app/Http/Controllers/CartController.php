@@ -90,13 +90,12 @@ class CartController extends Controller
     {
         $data = $request->json()->all();
         
-        $validator = Validator::make($request->all(), [
-            'qty' => 'required|numeric|between:1,10'
+        $validater = Validator::make($request->all(), [
+            'qty' => 'required|numeric|between:1,10',
         ]);
-        if($validator->fails())
+        if($validater->fails())
         {
             Session::flash('danger', 'ERROR');
-        
             return response()->json(['error' => 'ERROR']);
         }
         

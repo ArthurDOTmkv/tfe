@@ -19,7 +19,7 @@
                   <thead>
                     <tr>
                       <th scope="col" class="border-0 bg-light">
-                        <div class="p-2 px-3 text-uppercase">Product</div>
+                        <div class="p-2 px-3 text-uppercase">Concert</div>
                       </th>
                       <th scope="col" class="border-0 bg-light">
                         <div class="py-2 text-uppercase">Prix</div>
@@ -45,9 +45,9 @@
                       </th>
                       <td class="border-0 align-middle"><strong>{{getPrix($concert->subtotal())}}</strong></td>
                       <td class="border-0 align-middle">
-                          <select class="custom-select" name="qty" id="qty" data-id="{{$concert->rowId}}">
+                          <select name="qty" id="qty" data-id="{{$concert->rowId}}" class="custom-select">
                                 @for($i = 1; $i <= 10; $i++)
-                                <option value="{{$i}}">{{$i}}</option>
+                                <option value="{{$i}}" {{ $concert->qty == $i ? 'selected' : ''}}>{{$i}}</option>
                                 @endfor
                           </select>
                       </td>
@@ -113,8 +113,8 @@
 
 @section('js')
 <script>
-    var options = document.querySelectorAll('#quantite');
-    Array.from(options).forEach((element)=>{
+    var qty = document.querySelectorAll('#qty');
+    Array.from(qty).forEach((element)=>{
         element.addEventListener('change', function(){
             var rowId = this.getAttribute('data-id');
             var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -135,13 +135,12 @@
                     body: JSON.stringify({
                         qty: this.value
                     })
-                }    
-            ).then((data) => {
-                console.log(data);
-                location.reload();
-            }).catch((error) => {
-                console.log(error);
-            })
+                }).then((data) => {
+                    console.log(data);
+                    location.reload();
+                }).catch((error) => {
+                    console.log(error);
+                })
         });
     });
     
