@@ -15,7 +15,23 @@ class CreateCategorieConcertTable extends Migration
     {
         Schema::create('categorie_concert', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('categorie_id');
+            $table->unsignedBigInteger('concert_id');
             $table->timestamps();
+        });
+        
+        //Clés étrangères
+        Schema::table('categorie_concert', function (Blueprint $table)
+        {
+            $table->foreign('categorie_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('cascade');
+            
+            $table->foreign('concert_id')
+                ->references('id')
+                ->on('concerts')
+                ->onDelete('cascade');
         });
     }
 
