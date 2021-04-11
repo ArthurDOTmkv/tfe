@@ -35,3 +35,7 @@ Route::delete('/panier/{rowId}', 'CartController@destroy')->name('cart.destroy')
 Route::get('/paiement', 'PaiementController@index')->name('paiement.index');
 Route::get('/paiementreussi', 'PaiementController@paiementreussi')->name('paiement.paiementreussi');
 Route::post('/paiement', 'PaiementController@store')->name('paiement.store');
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
