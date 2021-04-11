@@ -25,8 +25,7 @@ class ConcertsTableSeeder extends Seeder
                'prix' => $faker->numberBetween(30, 120) * 100,          //Stocker le prix en centimes dans la DB (Best practice)
                'image' => 'https://via.placeholder.com/200x250'
             ])->categories()->attach([
-                rand(1, 4),
-                rand(1, 4)
+                rand(1, 5),
             ]);
         }
     }

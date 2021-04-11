@@ -9,7 +9,16 @@ class ConcertController extends Controller
 {
     public function index()
     {
-        $concerts = Concert::latest()->take(6)->get();
+        /*
+         * Afficher les concerts par catégorie
+         */
+        if(request()->categorie){
+            $concerts = Concert::with('categories')->whereHas('categories', function($query){
+                $query->where('slug', request()->categorie);
+            })->paginate(4);
+        } else {
+            $concerts = Concert::with('categories')->paginate(6);
+        }
         //dd($concerts);
         return view('concerts.index')->with('concerts', $concerts);
     }
