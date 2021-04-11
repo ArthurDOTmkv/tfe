@@ -15,4 +15,9 @@ class Concert extends Model
          */
         return number_format($prix, 2, ',', ' ') . " €";
     }
+    
+    public function categories()
+    {
+        return $this->belongsToMany('App\Categorie');
+    }
 }
