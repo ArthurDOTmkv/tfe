@@ -29,4 +29,16 @@ class ConcertController extends Controller
         
         return view('concerts.show')->with('concert', $concert);
     }
+    
+    public function search()
+    {
+        $search = request()->input('search');
+        
+        //Où le nom/description contient ce qu'on a entré en input
+        $concert = Concert::where('nom', 'like', "%$search%")
+                ->orWhere('description', 'like', "%$search%")
+                ->paginate(6);
+        
+        return view('concerts.search')->with('concerts', $concert);
+    }
 }

@@ -21,6 +21,7 @@ Route::get('/', function () {
 /*Routes pour les concerts*/
 Route::get('/concerts', 'ConcertController@index')->name('concerts.index');
 Route::get('/concerts/{slug}', 'ConcertController@show')->name('concerts.show');
+Route::get('/recherche', 'ConcertController@search')->name('concerts.search');
 
 /*  
  * Routes pour le panier
