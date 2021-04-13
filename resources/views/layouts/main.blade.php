@@ -219,6 +219,17 @@ h1, h2, h3, h4, h5, h6 {
         {{session('danger')}}
     </div>
 @endif
+
+@if(count($errors) > 0)
+    <div class='alert alert-danger'>
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
   <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
     <div class="col-md-6 px-0">
       <h1 class="display-4 fst-italic">Title of a longer featured blog post</h1>
@@ -226,7 +237,9 @@ h1, h2, h3, h4, h5, h6 {
       <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>
     </div>
   </div>
-
+@if(request()->input('search'))
+    <h6>{{$concerts->total()}} résultat(s) toruvés pour "{{request()->search}}"</h6>
+@endif
   <div class="row mb-2">
    @yield('content')
   </div>
