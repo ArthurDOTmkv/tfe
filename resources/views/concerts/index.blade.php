@@ -17,7 +17,7 @@
               <a href="{{route('concerts.show', $concert->slug)}}" class="stretched-link btn btn-light">Continuer vers le concert</a>
             </div>
             <div class="col-auto d-none d-lg-block">
-                <img src="{{$concert->image}}" alt="" />
+                <img src="{{asset('storage/' . $concert->image)}}" alt="" />
             </div>
           </div>
         </div>

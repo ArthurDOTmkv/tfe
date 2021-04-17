@@ -15,9 +15,9 @@ class ConcertController extends Controller
         if(request()->categorie){
             $concerts = Concert::with('categories')->whereHas('categories', function($query){
                 $query->where('slug', request()->categorie);
-            })->paginate(4);
+            })->orderBy('created_at', 'DESC')->paginate(4);
         } else {
-            $concerts = Concert::with('categories')->paginate(6);
+            $concerts = Concert::with('categories')->orderBy('created_at', 'DESC')->paginate(6);
         }
         //dd($concerts);
         return view('concerts.index')->with('concerts', $concerts);
