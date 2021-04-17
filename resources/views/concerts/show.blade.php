@@ -8,7 +8,9 @@
         <h3 class="mb-0">{{$concert->titre}}</h3>
         <div class="mb-1 text-muted">{{$concert->created_at->format('d/m/Y')}}</div>
         <div class="mb-1 text-muted"><b>Prix</b> : {{$concert->getPrix()}}</div>
-        <p class="mb-auto">{{$concert->description}}</p>
+        
+        <!-- Interpréter l'HTML -->
+        <p class="mb-auto">{!! $concert->description !!}</p>
         <form action='{{route('cart.store')}}' method='POST'>
             @csrf
             <input type='hidden' name='concert_id' value='{{$concert->id}}'>
@@ -16,7 +18,7 @@
         </form>
       </div>
       <div class="col-auto d-none d-lg-block">
-          <img src="{{$concert->image}}" alt="" />
+          <img src="{{asset('storage/' . $concert->image)}}" alt="" />
       </div>
     </div>
 </div>
