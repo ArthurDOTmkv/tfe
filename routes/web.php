@@ -32,11 +32,19 @@ Route::post('/panier/ajouter', 'CartController@store')->name('cart.store');
 Route::patch('/panier/{rowId}', 'CartController@update')->name('cart.update');
 Route::delete('/panier/{rowId}', 'CartController@destroy')->name('cart.destroy');
 
-/*Routes pour paiement*/
-Route::get('/paiement', 'PaiementController@index')->name('paiement.index');
-Route::get('/paiementreussi', 'PaiementController@paiementreussi')->name('paiement.paiementreussi');
-Route::post('/paiement', 'PaiementController@store')->name('paiement.store');
+/*
+ * Routes pour paiement
+ * Etre connecté pour pouvoir y accéder
+ */
+Route::group(['middleware' => ['auth']], function(){
+    Route::get('/paiement', 'PaiementController@index')->name('paiement.index');
+    Route::get('/paiementreussi', 'PaiementController@paiementreussi')->name('paiement.paiementreussi');
+    Route::post('/paiement', 'PaiementController@store')->name('paiement.store');
+});
 
+/*
+ * Default routes
+ */
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
