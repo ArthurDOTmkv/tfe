@@ -13,8 +13,17 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    You are logged in!
+                    <!-- Afficher toutes les commandes de l'utilistaeur connecté-->
+                    @foreach(Auth()->user()->commandes as $commande)
+                    <div class="card">
+                        <div class="card-header">
+                            Commande du {{Carbon\Carbon::parse($commande->paymentCreatedAt)->format('d/m/Y')}} <strong>({{getPrix($commande->montant)}})</strong>
+                        </div>
+                        <div class="card-body">
+                            
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
