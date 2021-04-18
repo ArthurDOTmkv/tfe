@@ -17,10 +17,16 @@
                     @foreach(Auth()->user()->commandes as $commande)
                     <div class="card">
                         <div class="card-header">
-                            Commande du {{Carbon\Carbon::parse($commande->paymentCreatedAt)->format('d/m/Y')}} <strong>({{getPrix($commande->montant)}})</strong>
+                            Commande du {{Carbon\Carbon::parse($commande->paymentCreatedAt)->format('d/m/Y')}} <strong>({{getPrix($commande->montant)}} TVA inclus)</strong>
                         </div>
                         <div class="card-body">
-                            
+                            <h5><strong>Liste des concerts</strong></h5>
+                            @foreach(unserialize($commande->concerts) as $concert)
+                            <div><b>Concert :</b> {{$concert[0]}}</div>
+                            <div><b>Prix :</b> {{getPrix($concert[1])}}</div>
+                            <div><b>Nombre de places :</b> {{$concert[2]}}</div>    
+                            </br>
+                            @endforeach
                         </div>
                     </div>
                     @endforeach
