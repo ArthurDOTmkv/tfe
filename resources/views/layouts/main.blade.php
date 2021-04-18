@@ -9,20 +9,23 @@
     <meta name="generator" content="Hugo 0.82.0">
     @yield('meta')
     <title>ConcertX</title>
+    
+    <!-- Scripts (drop down menu)-->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
     @yield('script')
 
     <!-- Bootstrap core CSS -->
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></link>
     <!-- Favicons -->
-<link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-<link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-<link rel="manifest" href="/docs/5.0/assets/img/favicons/manifest.json">
-<link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
-<link rel="icon" href="/docs/5.0/assets/img/favicons/favicon.ico">
-<meta name="theme-color" content="#7952b3">
+    <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="/docs/5.0/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
+    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon.ico">
+    <meta name="theme-color" content="#7952b3">
 
 
 <style>
@@ -41,6 +44,9 @@
   }
 </style>
 <style>
+li{
+    list-style: none;
+}
 .blog-header {
   line-height: 1;
   border-bottom: 1px solid #e5e5e5;
@@ -179,33 +185,34 @@ h1, h2, h3, h4, h5, h6 {
     <!-- Custom styles for this template -->
 
   </head>
-  <body>
+<body>
     
-<div class="container">
-  <header class="blog-header py-3">
-    <div class="row flex-nowrap justify-content-between align-items-center">
-      <div class="col-4 pt-1">
-          <a class="link-secondary" href="{{route('cart.index')}}">Panier<span class="badge rounded-pill bg-dark">{{Cart::count()}}</span></a>
-      </div>
-      <div class="col-4 text-center">
-        <a class="blog-header-logo text-dark" href="#">Large</a>
-      </div>
-      <div class="col-4 d-flex justify-content-end align-items-center">
-        @include('partials.search')
-        <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+<div id="app">
+    <div class="container">
+      <header class="blog-header py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+          <div class="col-4 pt-1">
+              <a class="link-secondary" href="{{route('cart.index')}}">Panier<span class="badge rounded-pill bg-dark">{{Cart::count()}}</span></a>
+          </div>
+          <div class="col-4 text-center">
+            <a class="blog-header-logo text-dark" href="#">Large</a>
+          </div>
+          <div class="col-4 d-flex justify-content-end align-items-center">
+            @include('partials.search')
+            @include('partials.auth')
+          </div>
+        </div>
+      </header>
+
+      <div class="nav-scroller py-1 mb-2">
+        <nav class="nav d-flex justify-content-between">
+            @foreach(App\Categorie::all() as $categorie)
+                <a class="p-2 link-secondary" href="{{route('concerts.index', ['categorie' => $categorie->slug])}}">{{$categorie->nom}}</a>
+            @endforeach
+        </nav>
       </div>
     </div>
-  </header>
-
-  <div class="nav-scroller py-1 mb-2">
-    <nav class="nav d-flex justify-content-between">
-        @foreach(App\Categorie::all() as $categorie)
-            <a class="p-2 link-secondary" href="{{route('concerts.index', ['categorie' => $categorie->slug])}}">{{$categorie->nom}}</a>
-        @endforeach
-    </nav>
-  </div>
 </div>
-
       
 <main class="container">
 @if(session('success'))
