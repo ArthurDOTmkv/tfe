@@ -22,6 +22,15 @@ class CreateCommandesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
+        
+        //Clé étrangère
+        Schema::table('commandes', function (Blueprint $table)
+        {
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('user')
+                ->onDelete('cascade');
+        });
     }
 
     /**
