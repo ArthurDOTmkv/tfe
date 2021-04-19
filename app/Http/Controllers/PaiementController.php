@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DateTime;
 use App\Commande;
+use App\Concert;
 use Illuminate\Support\Facades\Session;
 use Stripe\Stripe;
 use Stripe\PaymentIntent;
@@ -81,6 +82,7 @@ class PaiementController extends Controller
         $commande->save();
         if($data['paymentIntent']['status'] === 'succeeded')
         {
+            $this->majPlaces();
             Cart::destroy();
             Session::flash('success', 'Commande validée avec succès');
             return response()->json(['success' => 'Enregistrement validé']);
@@ -138,5 +140,16 @@ class PaiementController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    private function majPlaces()
+    {
+        foreach(Cart::content() as $obj)
+        {
+            //Récupération du produit avec l'id du model
+            $concert = Concert::find($obj->model->id);       //Attribut propre au model et pas à la DB
+            //MAJ du produit en fonction de la quantité choisie
+            $concert->update(['places' => $concert->places - $obj->qty]);
+        }
     }
 }

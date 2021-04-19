@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Concert extends Model
 {
+    //Champs modifiables
+    protected $fillable = ['places'];
+    
     public function getPrix()
     {
         $prix = $this->prix / 100;
