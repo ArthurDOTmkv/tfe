@@ -45,7 +45,8 @@
                       </th>
                       <td class="border-0 align-middle"><strong>{{getPrix($concert->subtotal())}}</strong></td>
                       <td class="border-0 align-middle">
-                          <select name="qty" id="qty" data-id="{{$concert->rowId}}" class="custom-select">
+                          <!-- ->model permet de passer les attributs d'un autre model nonobstant la variable sur laquelle on boucle -->
+                          <select name="qty" id="qty" data-id="{{$concert->rowId}}" data-places="{{$concert->model->places}}" class="custom-select">
                                 @for($i = 1; $i <= 10; $i++)
                                 <option value="{{$i}}" {{ $concert->qty == $i ? 'selected' : ''}}>{{$i}}</option>
                                 @endfor
@@ -118,6 +119,7 @@
         element.addEventListener('change', function(){
             var rowId = this.getAttribute('data-id');
             var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            var places = element.getAttributeById('data-places');
             fetch(
                 `/panier/${rowId}`,
                 {
@@ -134,6 +136,7 @@
                     method: 'PATCH',
                     body: JSON.stringify({
                         qty: this.value
+                        places: places
                     })
                 }).then((data) => {
                     console.log(data);
