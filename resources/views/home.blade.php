@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">Historique des commandes</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -28,7 +28,7 @@
                             </br>
                             @endforeach
                         </div>
-                    </div>
+                    </div></br>
                     @endforeach
                 </div>
             </div>
