@@ -99,6 +99,11 @@ class CartController extends Controller
             return response()->json(['error' => 'ERROR']);
         }
         
+        if($data['qty'] > $data['places']){
+            Session::flash('danger', 'Le nombre de places demandé est trop élevé. Places restantes : '. $data['places']);
+            return response()->json(['error' => 'ERROR']);
+        }
+        
         Cart::update($rowId, $data['qty']);
         
         Session::flash('success', 'Le nombre de tickets est passé à ' . $data['qty']);

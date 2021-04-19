@@ -119,7 +119,7 @@
         element.addEventListener('change', function(){
             var rowId = this.getAttribute('data-id');
             var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            var places = element.getAttributeById('data-places');
+            var places = element.getAttribute('data-places');
             fetch(
                 `/panier/${rowId}`,
                 {
@@ -135,7 +135,7 @@
                      */
                     method: 'PATCH',
                     body: JSON.stringify({
-                        qty: this.value
+                        qty: this.value,
                         places: places
                     })
                 }).then((data) => {
