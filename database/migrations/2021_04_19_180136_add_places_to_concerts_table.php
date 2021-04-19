@@ -13,8 +13,12 @@ class AddPlacesToConcertsTable extends Migration
      */
     public function up()
     {
+        /*
+         * On rajoute le champ 'places' à la table concerts pour la salle de spectacle
+         * qui, par défaut, contient 300 places
+         */
         Schema::table('concerts', function (Blueprint $table) {
-            //
+            $table->unsignedInteger('places')->after('prix')->default(300);
         });
     }
 

@@ -25,9 +25,12 @@ class ConcertController extends Controller
     
     public function show($slug)
     {
-        $concert = Concert::where('slug', $slug)->firstOrFail();        //Si mauvais sleug, renvoi 404
-        
-        return view('concerts.show')->with('concert', $concert);
+        $concert = Concert::where('slug', $slug)->firstOrFail();                //Si mauvais slug, renvoi 404 au lieu d'afficher une erreur
+        $places = $concert->places === 0 ? 'Indisponible' : 'Disponible';   //Si plus de places, renvoi 'Ind', sinon 'Disp'
+        return view('concerts.show', [
+            'concert' => $concert,
+            'places' => $places
+        ]);
     }
     
     public function search()
