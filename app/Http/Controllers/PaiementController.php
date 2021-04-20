@@ -63,9 +63,8 @@ class PaiementController extends Controller
         //Vérifier s'il y a des places dans le DB durant le paiement
         if($this->noSeats())
         {
-            Session::flash('error', 'Le nombre de places demandées pour le concert suivant : ' . $concerts->titre . 
-                    'n\'est plus disponible. Nombre de places restantes : ' . $concerts->places);
-            return response()->json(['success' => false, 400]);
+            Session::flash('danger', 'Le nombre de places demandées n\'est plus disponible');
+            return response()->json(['success' => false], 400);
         }
         //Récupération de l'objet de paiement dans la variable $data
         $data = $request->json()->all();
@@ -162,7 +161,7 @@ class PaiementController extends Controller
     
     private function noSeats()
     {
-        foreach(Cart::content() as $item)
+        foreach(Cart::content() as $obj)
         {
             $concert = Concert::find($obj->model->id);
             
@@ -171,7 +170,7 @@ class PaiementController extends Controller
              * return false => sortir erreur
              * Sinon, procéder au paiement
              */
-            if($concert->places < $concert->qty)
+            if($concert->places < $obj->qty)
             {
                 return true;
             }
