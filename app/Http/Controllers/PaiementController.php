@@ -60,6 +60,13 @@ class PaiementController extends Controller
      */
     public function store(Request $request)
     {
+        //Vérifier s'il y a des places dans le DB durant le paiement
+        if($this->noSeats())
+        {
+            Session::flash('error', 'Le nombre de places demandées pour le concert suivant : ' . $concerts->titre . 
+                    'n\'est plus disponible. Nombre de places restantes : ' . $concerts->places);
+            return response()->json(['success' => false, 400]);
+        }
         //Récupération de l'objet de paiement dans la variable $data
         $data = $request->json()->all();
         //Stocker les données de paymentIntent dans le champ paymentIntentId de la Commande
@@ -151,5 +158,24 @@ class PaiementController extends Controller
             //MAJ du produit en fonction de la quantité choisie
             $concert->update(['places' => $concert->places - $obj->qty]);
         }
+    }
+    
+    private function noSeats()
+    {
+        foreach(Cart::content() as $item)
+        {
+            $concert = Concert::find($obj->model->id);
+            
+            /*
+             * Si les places entrées sont inférieures à la quantité demandée
+             * return false => sortir erreur
+             * Sinon, procéder au paiement
+             */
+            if($concert->places < $concert->qty)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
