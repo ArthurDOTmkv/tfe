@@ -15,7 +15,18 @@ class CreateRepresentationsTable extends Migration
     {
         Schema::create('representations', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('concert_id');
+            $table->dateTime('moment');
             $table->timestamps();
+        });
+        
+        //Clé étrangère
+        Schema::table('representations', function (Blueprint $table)
+        {
+            $table->foreign('concert_id')
+                ->references('id')
+                ->on('concerts')
+                ->onDelete('cascade');
         });
     }
 

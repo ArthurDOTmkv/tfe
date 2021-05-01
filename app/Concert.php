@@ -28,4 +28,9 @@ class Concert extends Model
     {
         return $this->belongsToMany('App\Artiste');
     }
+    
+    public function represenations()
+    {
+        return $this->hasMany('App\Represenation');
+    }
 }
