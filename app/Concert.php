@@ -23,4 +23,9 @@ class Concert extends Model
     {
         return $this->belongsToMany('App\Categorie');
     }
+    
+    public function artistes()
+    {
+        return $this->belongsToMany('App\Artiste');
+    }
 }

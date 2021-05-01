@@ -15,7 +15,23 @@ class CreateArtisteConcertTable extends Migration
     {
         Schema::create('artiste_concert', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('artiste_id');
+            $table->unsignedBigInteger('concert_id');
             $table->timestamps();
+        });
+        
+        //Clés étrangères
+        Schema::table('artiste_concert', function (Blueprint $table)
+        {
+            $table->foreign('artiste_id')
+                ->references('id')
+                ->on('artistes')
+                ->onDelete('cascade');
+            
+            $table->foreign('concert_id')
+                ->references('id')
+                ->on('concerts')
+                ->onDelete('cascade');
         });
     }
 
