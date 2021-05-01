@@ -15,7 +15,23 @@ class CreateRepresentationPlacesTable extends Migration
     {
         Schema::create('representation_places', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('place_id');
+            $table->unsignedBigInteger('representation_id');
             $table->timestamps();
+        });
+        
+         //Clés étrangères
+        Schema::table('representation_places', function (Blueprint $table)
+        {
+            $table->foreign('place_id')
+                ->references('id')
+                ->on('places')
+                ->onDelete('cascade');
+            
+            $table->foreign('representation_id')
+                ->references('id')
+                ->on('representations')
+                ->onDelete('cascade');
         });
     }
 

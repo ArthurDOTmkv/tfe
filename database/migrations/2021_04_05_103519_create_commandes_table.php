@@ -20,6 +20,7 @@ class CreateCommandesTable extends Migration
             $table->dateTime('paymentCreatedAt');
             $table->text('concerts');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('representation_place_id');
             $table->timestamps();
         });
         
@@ -29,6 +30,11 @@ class CreateCommandesTable extends Migration
             $table->foreign('user_id')
                 ->references('id')
                 ->on('user')
+                ->onDelete('cascade');
+            
+            $table->foreign('represenation_place_id')
+                ->references('id')
+                ->on('representaion_place')
                 ->onDelete('cascade');
         });
     }
