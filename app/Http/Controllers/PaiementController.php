@@ -63,7 +63,7 @@ class PaiementController extends Controller
         //Vérifier s'il y a des places dans le DB durant le paiement
         if($this->noSeats())
         {
-            Session::flash('danger', 'Le nombre de places demandées n\'est plus disponible');
+            Session::flash('danger', 'Le nombre de places demandé n\'est plus disponible');
             return response()->json(['success' => false], 400);
         }
         //Récupération de l'objet de paiement dans la variable $data
