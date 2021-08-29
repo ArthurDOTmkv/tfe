@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
          * 
          */
         //$this->call(ZoneTableSeeder::class);
-        $this->call(PlacesTablesSeeder::class);
+        //$this->call(PlacesTablesSeeder::class);
+        $this->call(RepresentationsTableSeeder::class);
     }
 }
