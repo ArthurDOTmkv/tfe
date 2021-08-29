@@ -21,19 +21,23 @@ class PlacesTablesSeeder extends Seeder
         for ($x = 0; $x<15; $x++) {
             for ($y = 0; $y<20; $y++){
                 DB::table('places')->insert([
-                    'rangee' => x+1,
-                    'colonne' => y+1,
-                    'id_zone' => getZoneByRangee($x),
+                    'rangee' => $x+1,
+                    'colonne' => $y+1,
+                    'zone_id' => $this->getZoneByRangee($x+1)       //Rangées commencent à 1
                 ]);
             }
         }
     }
     
-    private function getZoneByRangee($x)
+    public function getZoneByRangee($x)
     {
         foreach(Zone::all() as $zone)
         {
-            if($zone->rangee_min)
+            //$this->info($zone->id);
+            if($x >= $zone->rangee_min && $x <= $zone->rangee_max)
+            {
+                return $zone->id;
+            }
         }
     }
 }

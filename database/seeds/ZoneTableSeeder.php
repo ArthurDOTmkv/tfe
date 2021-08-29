@@ -21,34 +21,34 @@ class ZoneTableSeeder extends Seeder
             'nom' => $alphabet[$i++],
             'rangee_min' => 1,
             'rangee_max' => 3,
-            'pourcentage_prix' => 1.4
+            'pourcentage' => 1.4
         ]);
         
         Zone::create([
             'nom' => $alphabet[$i++],
             'rangee_min' => 4,
             'rangee_max' => 7,
-            'pourcentage_prix' => 1.2
+            'pourcentage' => 1.2
         ]);
         
         Zone::create([
             'nom' => $alphabet[$i++],
             'rangee_min' => 8,
             'rangee_max' => 10,
-            'pourcentage_prix' => 1,
+            'pourcentage' => 1,
         ]);
         Zone::create([
             'nom' => $alphabet[$i++],
             'rangee_min' => 11,
             'rangee_max' => 13,
-            'pourcentage_prix' => 0.9
+            'pourcentage' => 0.9
         ]);
         
         Zone::create([
             'nom' => $alphabet[$i++],
             'rangee_min' => 14,
             'rangee_max' => 16,
-            'pourcentage_prix' => 0.8
+            'pourcentage' => 0.8
         ]);
     }
 }
