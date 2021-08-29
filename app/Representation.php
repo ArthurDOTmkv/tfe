@@ -10,4 +10,9 @@ class Representation extends Model
     {
         return $this->belongsTo('App\Concert');
     }
+    
+    public function places()
+    {
+        return $this->belongsToMany('App\Places');
+    }
 }

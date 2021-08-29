@@ -49,8 +49,11 @@ class CartController extends Controller
             return redirect()->route('concerts.index')->with('success', 'Les places ont déjà été ajoutées au panier');
         }
         
+        // $rep =  Representation::find($request->representation_id);
         //Ne passer que l'id en paramètre pour éviter de modifier les données à travers le front (prix, quantité, etc)
         $concert = Concert::find($request->concert_id);
+        
+        //Cart::add(['id' => $rep->show->id, 'name' => $rep->show->title, 'qty' => 1, 'price' => $rep->show->price, 'options' => ['date' => $rep->when]]);
         
         Cart::add($concert->id, $concert->titre, 1, $concert->prix)->associate('App\Concert');
         

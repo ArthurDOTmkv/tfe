@@ -97,7 +97,7 @@
                   <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
                     <h5 class="font-weight-bold">{{getPrix(Cart::total())}}</h5>
                   </li>
-                </ul><a href="{{route('paiement.index')}}" class="btn btn-dark rounded-pill py-2 btn-block">Procéder au paiment</a>
+                </ul><a href="{{route('paiement.index')}}" class="btn btn-dark rounded-pill py-2 btn-block">Procéder au paiement</a>
               </div>
             </div>
           </div>

@@ -11,4 +11,9 @@ class Place extends Model
         $this->belongsTo('App\Zone');
     }
     
+    public function representations()
+    {
+        return $this->belongsToMany('App\Reprentations');
+    }
+    
 }
