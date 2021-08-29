@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Concert;
+use App\Representation;
 use Illuminate\Http\Request;
 
 class ConcertController extends Controller
@@ -26,10 +27,12 @@ class ConcertController extends Controller
     public function show($slug)
     {
         $concert = Concert::where('slug', $slug)->firstOrFail();                //Si mauvais slug, renvoi 404 au lieu d'afficher une erreur
+        $representations = Representation::where('concert_id', $concert->id)->get();
         $places = $concert->places === 0 ? 'Indisponible' : 'Disponible';       //Si plus de places, renvoi 'Ind', sinon 'Disp'
         return view('concerts.show', [
             'concert' => $concert,
-            'places' => $places
+            'places' => $places,
+            'representations' => $representations,
         ]);
     }
     

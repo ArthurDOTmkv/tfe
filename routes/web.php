@@ -43,6 +43,10 @@ Route::group(['middleware' => ['auth']], function(){
 });
 
 /*
+ * Routes pour Représentations 
+ */
+Route::get('/representation', 'RepresentationController@show')->name('representation.show');
+/*
  * Default routes
  */
 Route::group(['prefix' => 'admin'], function () {
