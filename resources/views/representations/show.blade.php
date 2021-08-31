@@ -1,30 +1,28 @@
 @extends('layouts.main')
-
+@php
+use App\Place;
+@endphp
 @section('content')
-    @foreach($concerts as $concert)
-        <div class="col-md-6">
-          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-            <div class="col p-4 d-flex flex-column position-static">
-              <strong class="d-inline-block mb-2 text-primary">
-                    @foreach($concert->categories as $categorie)
-                        {{$categorie->nom}}
-                    @endforeach
-              </strong>
-              <h5 class="mb-0">{{$concert->titre}}</h5>
-              <div class="mb-1 text-muted">{{$concert->created_at->format('d/m/Y')}}</div>
-              <div class="mb-1 text-muted"><b>Prix</b> : {{$concert->getPrix()}}</div>
-              <p class="card-img mb-auto">{{$concert->soustitre}}</p>
-              <a href="{{route('concerts.show', $concert->slug)}}" class="stretched-link btn btn-light">Continuer vers le concert</a>
+    <h2 class="col-12">Concert du {{explode(' ', $representation->moment)[0]}} à {{explode(' ', $representation->moment)[1]}}</h2>
+    <h4 class=""col-12>Choisir la place</h4>
+    
+    @foreach($zones as $zone)
+        <div class="border rounded p-3 mb-2"><b>Zone {{$zone->nom}}</b></div>
+        @for($i = $zone->rangee_min; $i <= $zone->rangee_max; $i++)
+            <div class="row no-gutters">
+                @php
+                    $colonnes = Place::where('rangee', $i)->orderBy('colonne', 'asc')->get();
+                @endphp
+                @foreach($colonnes as $colonne)
+                    <div class="col border text-center">
+                        <div class="">
+                            <label class="d-block">({{$i}}, {{$colonne->colonne}})</label>
+                            <input type="checkbox" class="" name="{{$colonne->id}}">
+                            
+                        </div>
+                    </div>
+                @endforeach
             </div>
-            <div class="col-auto d-none d-lg-block">
-                <img src="{{asset('storage/' . $concert->image)}}" alt="" />
-            </div>
-          </div>
-        </div>
-   @endforeach
-   <!-- Générer les liens de pagination en concervant les slugs
-        sans la fonction appends(), les catégories ne sont pas 
-        reprises dans l'url
-   -->
-   {{$concerts->appends(request()->input())->links()}}
+        @endfor
+    @endforeach
 @endsection

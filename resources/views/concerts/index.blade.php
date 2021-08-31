@@ -1,5 +1,7 @@
 @extends('layouts.main')
-
+@php
+use App\Representation;
+@endphp
 @section('content')
     @foreach($concerts as $concert)
         <div class="col-md-6">
@@ -11,8 +13,10 @@
                     @endforeach
               </strong>
               <h5 class="mb-0">{{$concert->titre}}</h5>
-              <div class="mb-1 text-muted">{{$concert->created_at->format('d/m/Y')}}</div>
-              <div class="mb-1 text-muted"><b>Prix</b> : {{$concert->getPrix()}}</div>
+              @php
+                $begin = explode(' ', Representation::where('concert_id', $concert->id)->orderBy('moment', 'asc')->first()->get()->first()->moment)[0];
+              @endphp
+              <div class="mb-1 text-muted">A partir du : {{$begin}}</div>
               <p class="card-img mb-auto">{{$concert->soustitre}}</p>
               <a href="{{route('concerts.show', $concert->slug)}}" class="stretched-link btn btn-light">Continuer vers le concert</a>
             </div>

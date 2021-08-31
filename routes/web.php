@@ -18,7 +18,9 @@ Route::get('/', function () {
 /*
     @name : nécessaire pour passer la route en paramètres (form)
 */
-/*Routes pour les concerts*/
+/*
+ * Routes pour les concerts
+ */
 Route::get('/concerts', 'ConcertController@index')->name('concerts.index');
 Route::get('/concerts/{slug}', 'ConcertController@show')->name('concerts.show');
 Route::get('/search', 'ConcertController@search')->name('concerts.search');
@@ -45,7 +47,7 @@ Route::group(['middleware' => ['auth']], function(){
 /*
  * Routes pour Représentations 
  */
-Route::get('/representation', 'RepresentationController@show')->name('representation.show');
+Route::get('/representations/{id}', 'RepresentationController@show')->name('representations.show');
 /*
  * Default routes
  */

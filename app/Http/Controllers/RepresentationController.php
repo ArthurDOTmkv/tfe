@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Representation;
+use App\Zone;
+use App\Place;
+use Carbon\Carbon;
 
 class RepresentationController extends Controller
 {
@@ -20,13 +24,16 @@ class RepresentationController extends Controller
      public function show($id)
     {
         $representation = Representation::find($id);
-        $date = Carbon::parse($representation->when)->format('d/m/Y');
-        $heure = Carbon::parse($representation->when)->format('G:i');
+        $date = Carbon::parse($representation->moment)->format('d/m/Y');
+        $heure = Carbon::parse($representation->moment)->format('G:i');
         
-        return view('representation.show',[
+        $zones = Zone::all();
+        
+        return view('representations.show',[
             'representation' => $representation,
             'date' => $date,
             'heure' => $heure,
+            'zones' => $zones,
         ]);
     }
     

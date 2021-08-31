@@ -2,15 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Yama/tfe/app/Concert.php</file>
-            <file>file:/C:/Users/Yama/tfe/routes/web.php</file>
-            <file>file:/C:/Users/Yama/tfe/app/Http/Controllers/ConcertController.php</file>
-            <file>file:/C:/Users/Yama/tfe/app/Http/Controllers/RepresentationController.php</file>
-            <file>file:/C:/Users/Yama/tfe/resources/views/concerts/show.blade.php</file>
-            <file>file:/C:/Users/Yama/tfe/app/Representation.php</file>
-            <file>file:/C:/Users/Yama/tfe/resources/views/home.blade.php</file>
-            <file>file:/C:/Users/Yama/tfe/resources/views/representations/show.blade.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

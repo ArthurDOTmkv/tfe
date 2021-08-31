@@ -35,9 +35,9 @@
     <div class="row g-0">
         @foreach($representations as $representation)                  
             <div class="col-12 p-4 border rounded overflow-hidden mb-4 shadow-sm h-md-250">
-                  <a action='{{route('representation.show')}}'>
-                      <button class='btn btn-light'>Voir detail</button>
-                  </form>
+                  <a href='{{route('representations.show', $representation->id)}}'>
+                      <button class='btn btn-light'>{{$representation->moment}}</button>
+                  </a>
             </div>
         @endforeach
     </div>
