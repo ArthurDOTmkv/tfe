@@ -29,11 +29,15 @@ class RepresentationController extends Controller
         
         $zones = Zone::all();
         
+        //todo: changer requete
+        $taken = Place::where('rangee',3)->orWhere('rangee',6)->pluck('id')->toArray();
+        
         return view('representations.show',[
             'representation' => $representation,
             'date' => $date,
             'heure' => $heure,
             'zones' => $zones,
+            'taken' => $taken,
         ]);
     }
     

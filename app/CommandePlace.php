@@ -4,15 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RepresentationPlace extends Model
+class CommandePlace extends Model
 {
     public function places()
     {
         return $this->belongsTo('App\Place');
     }
     
-    public function representaions()
+    public function commande()
     {
-        $this->belongsToMany('App\Representation');
+        $this->belongsToMany('App\Commande');
     }
 }

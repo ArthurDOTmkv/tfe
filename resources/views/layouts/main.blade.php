@@ -195,7 +195,7 @@ h1, h2, h3, h4, h5, h6 {
               <a class="link-secondary" href="{{route('cart.index')}}">Panier<span class="badge rounded-pill bg-dark">{{Cart::count()}}</span></a>
           </div>
           <div class="col-4 text-center">
-            <a class="blog-header-logo text-dark" href="#">Large</a>
+            <a class="blog-header-logo text-dark" href="#">ConcertX</a>
           </div>
           <div class="col-4 d-flex justify-content-end align-items-center">
             @include('partials.search')

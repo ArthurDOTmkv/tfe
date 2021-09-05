@@ -11,8 +11,8 @@ class Representation extends Model
         return $this->belongsTo('App\Concert');
     }
     
-    public function places()
+    public function commandes()
     {
-        return $this->belongsToMany('App\Places');
+        return $this->belongsToMany('App\Commandes');
     }
 }
